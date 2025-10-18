@@ -1,0 +1,23 @@
+name: Commit Colab Notebook
+
+on:
+  push:
+    branches:
+      - main # Or your default branch
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'ritesh1601'
+          git config --global user.email 'riteshsaini1601.com'
+          git add .
+          git commit -m "Automated commit from Google Colab" || echo "No changes to commit"
+          git push
